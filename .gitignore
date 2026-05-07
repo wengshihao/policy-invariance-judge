@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+
+# Environment
+.env
+.env.local
+
+# Outputs (regenerable)
+results/
+logs/
+outputs/
+
+# Auto-fetched benchmarks
+data/ASSEBench/
+data/R-Judge/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Plot caches
+figures/_icons/
