@@ -7,8 +7,8 @@
 ![Judge Card](https://img.shields.io/badge/protocol-Judge%20Card-3a7d9c)
 ![License](https://img.shields.io/badge/license-TBD-lightgrey)
 
-<p align="center">
-  <img src="figures/overview.png" alt="Policy Invariance Stress-Test Overview" width="100%">
+<p align="left">
+  <img src="figures/overview.png" alt="Policy Invariance Stress-Test Overview" width="70%">
 </p>
 
 `policy-invariance-judge` (PIJ) is the reference implementation of the
@@ -36,19 +36,21 @@ The two artefacts the paper releases live in this repo:
 
 ## Table of Contents
 
-- [Why this repo exists](#why-this-repo-exists)
-- [Repository layout](#repository-layout)
-- [Installation](#installation)
-- [Quick start: audit your judge in five minutes](#quick-start-audit-your-judge-in-five-minutes)
-- [Core concepts](#core-concepts)
-- [Running each experiment](#running-each-experiment)
-- [Reproducing the paper](#reproducing-the-paper)
-  - [End-to-end](#end-to-end)
-  - [One table or figure at a time](#one-table-or-figure-at-a-time)
-- [The PIS metric API](#the-pis-metric-api)
-- [The Judge Card API](#the-judge-card-api)
-- [Configuration](#configuration)
-- [Known limitations](#known-limitations)
+- [policy-invariance-judge](#policy-invariance-judge)
+  - [Table of Contents](#table-of-contents)
+  - [Why this repo exists](#why-this-repo-exists)
+  - [Repository layout](#repository-layout)
+  - [Installation](#installation)
+  - [Quick start: audit your judge in five minutes](#quick-start-audit-your-judge-in-five-minutes)
+  - [Core concepts](#core-concepts)
+  - [Running each experiment](#running-each-experiment)
+  - [Reproducing the paper](#reproducing-the-paper)
+    - [End-to-end](#end-to-end)
+    - [One table or figure at a time](#one-table-or-figure-at-a-time)
+  - [The PIS metric API](#the-pis-metric-api)
+  - [The Judge Card API](#the-judge-card-api)
+  - [Configuration](#configuration)
+  - [Known limitations](#known-limitations)
 
 ---
 
