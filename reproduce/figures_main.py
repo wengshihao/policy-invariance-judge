@@ -4,7 +4,7 @@ The published paper carries two figures in the main text:
 
   * ``figures/overview.pdf``        — the three-principle overview, shipped as a
                                       static asset (not regenerated from results).
-  * ``figures/fig5_disagreement.pdf`` — disagreement decomposition (Fig. 5,
+  * ``figures/fig5_disagreement.pdf`` — disagreement decomposition (paper Fig. 2,
                                       §5 Principle 3).
 
 This script regenerates the second one. ``overview.pdf`` is bundled in the
@@ -38,7 +38,7 @@ def main() -> None:
         print("No judge results found. Run scripts/run_judge.py first.")
         return
 
-    print("Fig 5 — disagreement decomposition")
+    print("Fig 2 — disagreement decomposition")
     decomp = {label: disagreement_decomposition(model_results[label])
               for label in model_results}
     fig_disagreement(decomp, FIGURES_DIR / "fig5_disagreement.pdf")

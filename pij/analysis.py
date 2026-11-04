@@ -23,7 +23,7 @@ from .metrics import (
 )
 
 
-# ── Per-transform CIs (Table 5 / Fig. app_per_transform_ci) ────────────────
+# ── Per-transform CIs (paper Table 8 / Fig. 3) ────────────────
 
 def per_transform_ci(results: Iterable[dict]) -> dict:
     """For each transform compute mean Δ_flip and a bootstrap 95% CI."""
@@ -57,7 +57,7 @@ def per_transform_ci(results: Iterable[dict]) -> dict:
     return out
 
 
-# ── Clear vs ambiguous (Table 6) ───────────────────────────────────────────
+# ── Clear vs ambiguous (paper Table 10) ───────────────────────────────────────────
 
 def clear_vs_ambiguous(results: Iterable[dict]) -> dict:
     """Per-(ambiguity, transform) Δ_flip with item-clustered bootstrap CIs."""
@@ -103,7 +103,7 @@ def clear_vs_ambiguous(results: Iterable[dict]) -> dict:
     return out
 
 
-# ── Per-dataset ablation (Table 4) ─────────────────────────────────────────
+# ── Per-dataset ablation (paper Table 9) ─────────────────────────────────────────
 
 def per_dataset_ablation(results: Iterable[dict]) -> dict:
     rows = list(results)
@@ -151,7 +151,7 @@ def per_domain_certified_dflip(results: Iterable[dict],
     return out
 
 
-# ── Cross-model pairwise (Table 8 + Jaccard fig) ───────────────────────────
+# ── Cross-model pairwise (paper Table 13 + Fig. 8) ───────────────────────────
 
 def pairwise_baseline_agreement(model_results: Mapping[str, list[dict]]) -> dict:
     anchors: dict[str, dict[str, str]] = {}
@@ -206,7 +206,7 @@ def pairwise_flip_jaccard(model_results: Mapping[str, list[dict]]) -> dict:
     return out
 
 
-# ── Strict-to-lenient breakdown (Table 2 + ambiguity slice) ────────────────
+# ── Strict-to-lenient breakdown (paper Table 3 + Table 11) ────────────────
 
 def strict_lenient_breakdown(rows: Iterable[dict]) -> dict:
     rows = list(rows)

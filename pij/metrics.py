@@ -247,8 +247,9 @@ def policy_invariance_score(certified_delta_flip: float,
         + w3 * float(U_rate)
     )
     pis = max(0.0, 1.0 - deduction * scale)
-    # Thresholds match the paper's Table 3 labels: PIS 0.70 -> "Moderate",
-    # 0.47 -> "Fragile", 0.28 -> "Unreliable".
+    # Thresholds match the paper's Table 4 bands: Robust >= 0.8, Moderate >= 0.6,
+    # Fragile >= 0.4, Unreliable < 0.4 (e.g., PIS 0.70 -> "Moderate",
+    # 0.47 -> "Fragile", 0.28 -> "Unreliable").
     if pis >= 0.8:
         interp = "ROBUST"
     elif pis >= 0.6:

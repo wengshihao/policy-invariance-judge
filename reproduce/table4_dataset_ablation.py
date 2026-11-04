@@ -1,4 +1,4 @@
-"""Reproduce Table 4: per-dataset (ASSEBench vs R-Judge) Δ_flip.
+"""Reproduce paper Table 9: per-dataset (ASSEBench vs R-Judge) Δ_flip.
 
 Usage
 -----
@@ -32,7 +32,7 @@ def main() -> None:
     out.write_text(json.dumps(rows, indent=2))
     print(f"Wrote {out}\n")
 
-    print("## Table 4 — Per-Dataset Certified Pooled Δ_flip\n")
+    print("## Table 9 — Per-Dataset Certified Pooled Δ_flip\n")
     print("| Model | ASSEBench Δ_flip | n | R-Judge Δ_flip | n |")
     print("|-------|------------------|---|----------------|---|")
     for r in rows:

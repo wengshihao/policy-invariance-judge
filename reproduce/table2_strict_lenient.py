@@ -1,4 +1,4 @@
-"""Reproduce Table 2: strict-to-lenient flip rate and directional ratio.
+"""Reproduce paper Table 3: strict-to-lenient flip rate and directional ratio.
 
 Usage
 -----
@@ -41,7 +41,7 @@ def main() -> None:
     out.write_text(json.dumps(rows, indent=2))
     print(f"Wrote {out}\n")
 
-    print("## Table 2 — Strict-to-Lenient Switching\n")
+    print("## Table 3 — Strict-to-Lenient Switching\n")
     print("| Model | Flip Rate | Unsafe→Safe | Safe→Unsafe | R_dir |")
     print("|-------|-----------|-------------|-------------|-------|")
     for r in rows:

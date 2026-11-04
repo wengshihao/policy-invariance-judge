@@ -1,4 +1,4 @@
-"""Reproduce Table 8 + Jaccard table: cross-model anchor verdict
+"""Reproduce paper Table 13 + Fig. 8 (Jaccard): cross-model anchor verdict
 agreement and flipped-item Jaccard overlap.
 
 Usage

@@ -1,4 +1,4 @@
-"""Reproduce Table 3: Judge Cards (PIS, P1, P2, P3).
+"""Reproduce paper Table 4: Judge Cards (PIS, P1, P2, P3).
 
 Combines per-judge results with strict-lenient logs to instantiate the
 Judge Card for every paper model. Writes
@@ -38,7 +38,7 @@ def main() -> None:
     out.write_text(json.dumps(cards, indent=2))
     print(f"Wrote {out}\n")
 
-    print("## Table 3 — Judge Cards\n")
+    print("## Table 4 — Judge Cards\n")
     print("| Model | PIS | P1 (cert. Δ_flip) | P2 (R_dir) | P3 (U_rate) | Interpretation |")
     print("|-------|-----|-------------------|------------|-------------|----------------|")
     for label, card in cards.items():

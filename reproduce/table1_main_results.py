@@ -1,4 +1,4 @@
-"""Reproduce Table 1: certified-equivalent Δ_flip by model and transform.
+"""Reproduce paper Table 2: certified-equivalent Δ_flip by model and transform.
 
 Reads ``results/judge_<tag>.json`` for every paper model and writes
 ``results/table1_main_results.json`` plus a Markdown table to stdout.
@@ -64,7 +64,7 @@ def main() -> None:
     print(f"Wrote {out_path}")
 
     # Markdown
-    print("\n## Table 1 — Certified-Equivalent Δ_flip\n")
+    print("\n## Table 2 — Certified-Equivalent Δ_flip\n")
     print("| Model | n | T1 | T2 | T4 | Pooled | T3 | T5 | Jitter |")
     print("|-------|---|----|----|----|--------|----|----|--------|")
     for r in rows:

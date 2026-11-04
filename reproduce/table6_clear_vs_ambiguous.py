@@ -1,4 +1,4 @@
-"""Reproduce Table 6: certified pooled Δ_flip on clear vs ambiguous items.
+"""Reproduce paper Table 10: certified pooled Δ_flip on clear vs ambiguous items.
 
 Usage
 -----
@@ -32,7 +32,7 @@ def main() -> None:
     out.write_text(json.dumps(rows, indent=2))
     print(f"Wrote {out}\n")
 
-    print("## Table 6 — Clear vs Ambiguous Pooled Δ_flip\n")
+    print("## Table 10 — Clear vs Ambiguous Pooled Δ_flip\n")
     print("| Model | Clear Δ_flip | n | Ambig. Δ_flip | n | Diff (pp) |")
     print("|-------|--------------|---|---------------|---|-----------|")
     for r in rows:

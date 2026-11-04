@@ -1,4 +1,4 @@
-"""Reproduce Table 5: per-(model, transform) Δ_flip with bootstrap 95% CIs.
+"""Reproduce paper Table 8: per-(model, transform) Δ_flip with bootstrap 95% CIs.
 
 Usage
 -----
@@ -32,7 +32,7 @@ def main() -> None:
     out.write_text(json.dumps(rows, indent=2))
     print(f"Wrote {out}\n")
 
-    print("## Table 5 — Per-Transform Δ_flip with 95% CI\n")
+    print("## Table 8 — Per-Transform Δ_flip with 95% CI\n")
     print("| Model | Jitter | T1 | T2 | T3 | T4 | T5 |")
     print("|-------|--------|----|----|----|----|----|")
     for r in rows:

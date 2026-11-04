@@ -7,13 +7,26 @@ name = "policy-invariance-judge"
 version = "1.0.0"
 description = "Three-principle stress-test for LLM safety judges."
 readme = "README.md"
+license = {text = "MIT"}
 requires-python = ">=3.9"
+authors = [
+  {name = "Shihao Weng", email = "shweng@smail.nju.edu.cn"},
+  {name = "Yang Feng", email = "fengyang@nju.edu.cn"},
+  {name = "Xiaofei Xie", email = "xfxie@smu.edu.sg"},
+]
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+]
 dependencies = [
   "openai>=1.0",
   "numpy>=1.24",
   "matplotlib>=3.7",
   "scipy>=1.10",
 ]
+
+[project.urls]
+Repository = "https://github.com/wengshihao/policy-invariance-judge"
 
 [tool.setuptools.packages.find]
 include = ["pij*"]

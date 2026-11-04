@@ -40,7 +40,7 @@ def _ensure_dir(path: Path) -> Path:
     return path
 
 
-# ── Forest plot of certified Δ_flip (Fig. 1) ───────────────────────────────
+# ── Forest plot of certified Δ_flip (supplementary) ───────────────────────────────
 
 def fig_cross_model_forest(per_model_delta: Mapping[str, dict],
                            out_path: str | Path) -> Path:
@@ -84,7 +84,7 @@ def fig_cross_model_forest(per_model_delta: Mapping[str, dict],
     return out
 
 
-# ── Heatmap of model × transform Δ_flip (Fig. 2) ───────────────────────────
+# ── Heatmap of model × transform Δ_flip (supplementary) ───────────────────────────
 
 def fig_transform_heatmap(per_model_delta: Mapping[str, dict],
                           out_path: str | Path) -> Path:
@@ -117,7 +117,7 @@ def fig_transform_heatmap(per_model_delta: Mapping[str, dict],
     return out
 
 
-# ── Ambiguity moderation (Fig. 4) ──────────────────────────────────────────
+# ── Ambiguity moderation (supplementary) ──────────────────────────────────────────
 
 def fig_ambiguity_moderation(per_model_delta: Mapping[str, dict],
                              out_path: str | Path) -> Path:
@@ -145,7 +145,7 @@ def fig_ambiguity_moderation(per_model_delta: Mapping[str, dict],
     return out
 
 
-# ── Disagreement decomposition (Fig. 5) ────────────────────────────────────
+# ── Disagreement decomposition (paper Fig. 2) ────────────────────────────────────
 
 def fig_disagreement(per_model_decomp: Mapping[str, dict],
                      out_path: str | Path) -> Path:
@@ -180,7 +180,7 @@ def fig_disagreement(per_model_decomp: Mapping[str, dict],
     return out
 
 
-# ── Judge Card visual (Fig. 6) ─────────────────────────────────────────────
+# ── Judge Card visual (supplementary) ─────────────────────────────────────────────
 
 def fig_judge_cards(cards: Mapping[str, dict],
                     out_path: str | Path) -> Path:

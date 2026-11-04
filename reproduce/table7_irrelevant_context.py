@@ -1,4 +1,4 @@
-"""Reproduce Table 7 (paper Table for T6 — irrelevant context injection).
+"""Reproduce paper Table 12 (T6, irrelevant context injection).
 
 Usage
 -----
@@ -34,7 +34,7 @@ def main() -> None:
     out.write_text(json.dumps(rows, indent=2))
     print(f"Wrote {out}\n")
 
-    print("## Table 7 — T6: Irrelevant Context Injection\n")
+    print("## Table 12 — T6: Irrelevant Context Injection\n")
     print("| Model | Total Flip | Clear | Ambig. | S→U | U→S |")
     print("|-------|-----------|-------|--------|-----|-----|")
     for r in rows:

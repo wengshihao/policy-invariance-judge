@@ -1,11 +1,15 @@
 # policy-invariance-judge
 
 > **Are LLM Safety Judges Policy-Invariant? A Three-Principle Stress-Test**
+> Shihao Weng<sup>1</sup>, Yang Feng<sup>1,\*</sup>, Xiaofei Xie<sup>2</sup>
+> <sup>1</sup>Nanjing University &nbsp; <sup>2</sup>Singapore Management University &nbsp; <sup>\*</sup>Corresponding author
+> *NeurIPS 2026, Track on Evaluations and Datasets*
 
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue)
 ![PIS](https://img.shields.io/badge/metric-Policy%20Invariance%20Score-1f9a3b)
 ![Judge Card](https://img.shields.io/badge/protocol-Judge%20Card-3a7d9c)
-![License](https://img.shields.io/badge/license-TBD-lightgrey)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Venue](https://img.shields.io/badge/NeurIPS-2026-7b2cbf)
 
 <p align="left">
   <img src="figures/overview.png" alt="Policy Invariance Stress-Test Overview" width="70%">
@@ -51,6 +55,9 @@ The two artefacts the paper releases live in this repo:
   - [The Judge Card API](#the-judge-card-api)
   - [Configuration](#configuration)
   - [Known limitations](#known-limitations)
+  - [Certified rewrites and annotation records](#certified-rewrites-and-annotation-records)
+  - [Citation](#citation)
+  - [License](#license)
 
 ---
 
@@ -70,6 +77,7 @@ shift the default question from "how often is the judge right?" to
 ```
 policy-invariance-judge/
 ├── README.md                  ← you are here
+├── LICENSE                    ← MIT license
 ├── pyproject.toml             ← package metadata
 ├── requirements.txt           ← runtime dependencies
 ├── .env.example               ← copy to .env, add your provider keys
@@ -106,19 +114,23 @@ policy-invariance-judge/
 │   ├── table6_clear_vs_ambiguous.py
 │   ├── table7_irrelevant_context.py
 │   ├── table8_cross_model.py
-│   ├── figures_main.py        ← Fig. 5 (disagreement decomposition)
+│   ├── figures_main.py        ← Fig. 2 (disagreement decomposition)
 │   ├── figures_appendix.py    ← all eight appendix figures
 │   └── figures_extra.py       ← supplementary plots not in the paper
 │
-├── data/                      ← only the master_table and rewrites land here
-│   └── README.md              ← how to fetch ASSEBench and R-Judge
+├── data/
+│   ├── README.md              ← how to fetch ASSEBench and R-Judge; file provenance
+│   ├── rewrites_all.json      ← final certified rewrite set used in the paper
+│   ├── raw_rewrites_all.json  ← first-pass rewrites before regeneration
+│   ├── verify_certified_equivalence.py  ← checks the full certification chain
+│   └── annotations/           ← per-pair records of annotators A, B, C + annotation UI
 └── figures/                   ← regenerated PDFs land here (overview.pdf shipped)
 ```
 
 ## Installation
 
 ```bash
-git clone <this-repo> policy-invariance-judge
+git clone https://github.com/wengshihao/policy-invariance-judge.git
 cd policy-invariance-judge
 
 # (Recommended) isolated environment
@@ -152,7 +164,7 @@ python scripts/audit_my_judge.py --model gpt-4o-mini
 
 # Output:
 # ### Judge Card: `gpt-4o-mini`
-# - Policy Invariance Score (PIS): 0.71  (ROBUST)
+# - Policy Invariance Score (PIS): 0.71  (MODERATE)
 # - Items tested: 30
 # | Principle | Metric                | Value |
 # | P1        | certified Δ_flip lower | 0.011 |
@@ -183,7 +195,8 @@ and a lenient policy (`pij.policies.STRICT_POLICY`,
 
 The headline metric is the jitter-corrected flip rate
 `Δ_flip = P_flip − P_jitter`, with `P_jitter` measured by repeating the
-identical prompt three times at temperature zero. The proof of
+identical prompt three times at temperature zero (pass `--n-jitter 6` to
+`scripts/run_judge.py` for the six-rerun analysis in Appendix Q.1). The proof of
 unbiasedness and the cluster-bootstrap consistency argument are in the
 paper appendix; their estimators live in `pij.metrics`.
 
@@ -234,17 +247,17 @@ Every paper table and figure has a dedicated script under `reproduce/`.
 Run any of them once the underlying experiment files exist:
 
 ```bash
-python reproduce/table1_main_results.py        # Table 1 (certified Δ_flip per model)
-python reproduce/table2_strict_lenient.py      # Table 2 (strict-to-lenient + R_dir)
-python reproduce/table3_judge_cards.py         # Table 3 (Judge Cards with PIS)
-python reproduce/table4_dataset_ablation.py    # Table 4 (ASSEBench vs R-Judge)
-python reproduce/table5_per_transform_ci.py    # Table 5 (per-transform CIs)
-python reproduce/table6_clear_vs_ambiguous.py  # Table 6 (clear vs ambiguous slice)
-python reproduce/table7_irrelevant_context.py  # Table 7 (T6 directional breakdown)
-python reproduce/table8_cross_model.py         # Table 8 (pairwise agreement + Jaccard)
+python reproduce/table1_main_results.py        # paper Table 2 (certified Δ_flip per model)
+python reproduce/table2_strict_lenient.py      # paper Table 3 (strict-to-lenient + R_dir)
+python reproduce/table3_judge_cards.py         # paper Table 4 (Judge Cards with PIS)
+python reproduce/table4_dataset_ablation.py    # paper Table 9 (ASSEBench vs R-Judge)
+python reproduce/table5_per_transform_ci.py    # paper Table 8 (per-transform CIs)
+python reproduce/table6_clear_vs_ambiguous.py  # paper Table 10 (clear vs ambiguous slice)
+python reproduce/table7_irrelevant_context.py  # paper Table 12 (T6 directional breakdown)
+python reproduce/table8_cross_model.py         # paper Table 13 + Fig. 8 (agreement + Jaccard)
 
-python reproduce/figures_main.py               # Fig. 5 (disagreement decomposition)
-python reproduce/figures_appendix.py           # eight appendix figures
+python reproduce/figures_main.py               # paper Fig. 2 (disagreement decomposition)
+python reproduce/figures_appendix.py           # appendix Figs. 3 to 10
 python reproduce/figures_extra.py              # supplementary plots (not in paper)
 ```
 
@@ -300,7 +313,7 @@ print(card["policy_invariance_score"], card["interpretation"])
 ```
 
 The returned dict is JSON-serialisable and matches the structure used
-in the paper's Table 3. When the judge has parse failures on the
+in the paper's Table 4. When the judge has parse failures on the
 rewrite arm (as Gemini-3-Flash does in the paper), the PIS field
 returns a `[lower, upper]` bracket rather than a single point estimate;
 the lower endpoint conditions on parseable items only and the upper
@@ -322,9 +335,10 @@ All knobs are environment variables (loaded from `.env` if present):
 
 These are the same caveats reported in the paper:
 
-* The protocol perturbs a single standardised base policy; deployment
-  rubrics with hundreds of clauses, jurisdictional terminology, or
-  domain-specific carve-outs are not yet covered.
+* The main analysis perturbs one standardised base policy, and a second
+  base policy reproduces the findings; deployment rubrics with hundreds
+  of clauses, jurisdictional terminology, or domain-specific carve-outs
+  are not yet covered.
 * Per-pair human equivalence certification scales linearly with policy
   length. The included rewrites pass the per-pair certification rule,
   but very long policies require proportionally more annotator effort.
@@ -338,5 +352,51 @@ These are the same caveats reported in the paper:
   multilingual rubrics, and abstention coverage-risk curves are open
   problems.
 
-ASSEBench and R-Judge are governed by their own upstream licences;
-please consult each repository before redistributing their data.
+
+## Certified rewrites and annotation records
+
+For reproducibility, `data/` also contains the materials behind the
+human equivalence certification (paper Section 4.4 and Appendix F):
+
+* `rewrites_all.json`: the exact rewrite set used in the main analysis
+  (500 items, transforms T1 to T5).
+* `raw_rewrites_all.json`: the first-pass rewrites. Pairs that failed
+  certification were regenerated and re-annotated.
+* `annotations/`: the per-pair records of the three anonymized
+  annotators for the initial round and the regeneration round, plus the
+  annotation interface with the six-dimension codebook
+  (`annotation_ui.py`). The `near-equivalence-sample-*` files hold the
+  annotations of the T3/T5 sample used for the perturbation-success rate.
+* `verify_certified_equivalence.py`: checks the complete annotation,
+  regeneration, and unanimous-certification chain.
+
+```bash
+python data/verify_certified_equivalence.py
+# PASS: every final T1/T2/T4 pair is backed by unanimous six-dimensional human certification.
+```
+
+The rewrites were generated from the paper's base policy by
+GPT-5.4-thinking (temperature 0.3) and certified by three independent
+annotators. The released stress-test tool also provides the automatic
+check `validate_rewrite`, so that new users can run the protocol without
+human annotation; the paper's analyses additionally require the human
+certification.
+
+## Citation
+
+If you use this code, please cite:
+
+```bibtex
+@inproceedings{weng2026policyinvariance,
+  title     = {Are {LLM} Safety Judges Policy-Invariant? A Three-Principle Stress-Test},
+  author    = {Weng, Shihao and Feng, Yang and Xie, Xiaofei},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS), Track on Evaluations and Datasets},
+  year      = {2026}
+}
+```
+
+## License
+
+This repository is released under the [MIT License](LICENSE).
+ASSEBench, R-Judge, and ATBench are not redistributed here and remain
+under their own upstream licenses.
